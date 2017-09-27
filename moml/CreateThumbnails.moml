@@ -1,0 +1,127 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE entity PUBLIC "-//UC Berkeley//DTD MoML 1//EN"
+    "http://ptolemy.eecs.berkeley.edu/xml/dtd/MoML_1.dtd">
+<entity name="CreateThumbnails" class="ptolemy.actor.TypedCompositeActor">
+    <property name="_createdBy" class="ptolemy.kernel.attributes.VersionAttribute" value="7.0.1">
+    </property>
+    <property name="_workbenchVersion" class="ptolemy.kernel.attributes.VersionAttribute" value="null">
+    </property>
+    <property name="Director" class="com.isencia.passerelle.domain.et.ETDirector">
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{50, 50}">
+        </property>
+    </property>
+    <entity name="Start" class="com.isencia.passerelle.edm.actor.StartActor">
+        <property name="Buffer time (ms)" class="ptolemy.data.expr.Parameter" value="0">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{117.5, 146.75}">
+        </property>
+    </entity>
+    <entity name="Create thumbnails for pyarch" class="eu.esrf.passerelle.python.actor.PythonActor">
+        <property name="Buffer time (ms)" class="ptolemy.data.expr.Parameter" value="0">
+        </property>
+        <property name="Error Strategy" class="ptolemy.data.expr.StringParameter" value="Continue via output port">
+        </property>
+        <property name="Result tag" class="ptolemy.data.expr.StringParameter" value="">
+        </property>
+        <property name="Condition tag" class="ptolemy.data.expr.StringParameter" value="">
+        </property>
+        <property name="Attribute mapping" class="ptolemy.data.expr.StringParameter" value="image_path&#10;jpeg_path&#10;jpeg_thumbnail_path">
+            <property name="textarea" class="ptolemy.actor.gui.style.TextStyle">
+                <property name="height" class="ptolemy.data.expr.Parameter" value="10">
+                </property>
+                <property name="width" class="ptolemy.data.expr.Parameter" value="30">
+                </property>
+            </property>
+        </property>
+        <property name="script_path" class="ptolemy.data.expr.FileParameter" value="createThumbnailsForPyarch.py">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{278.0, 160.5}">
+        </property>
+    </entity>
+    <entity name="Stop" class="com.isencia.passerelle.actor.control.Stop">
+        <property name="Receiver Q Capacity (-1)" class="ptolemy.data.expr.Parameter" value="-1">
+        </property>
+        <property name="Receiver Q warning size (-1)" class="ptolemy.data.expr.Parameter" value="-1">
+        </property>
+        <property name="PassThrough" class="ptolemy.data.expr.Parameter" value="false">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{903.0, 296.25}">
+        </property>
+    </entity>
+    <entity name="Set Request Status to FINISHED" class="com.isencia.passerelle.edm.actor.RequestStatus">
+        <property name="Buffer time (ms)" class="ptolemy.data.expr.Parameter" value="0">
+        </property>
+        <property name="status" class="ptolemy.data.expr.StringParameter" value="FINISHED">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{625.75, 419.0}">
+        </property>
+    </entity>
+    <entity name="Check if thumbnails are created" class="com.isencia.passerelle.edm.actor.kb.ResultItemSplitter">
+        <property name="Buffer time (ms)" class="ptolemy.data.expr.Parameter" value="0">
+        </property>
+        <property name="Result tag" class="ptolemy.data.expr.StringParameter" value="">
+        </property>
+        <property name="Condition tag" class="ptolemy.data.expr.StringParameter" value="">
+        </property>
+        <property name="item name" class="ptolemy.data.expr.StringParameter" value="thumbnailsCreated">
+        </property>
+        <property name="item search depth" class="ptolemy.data.expr.Parameter" value="0">
+        </property>
+        <property name="data type" class="ptolemy.data.expr.StringParameter" value="">
+        </property>
+        <property name="default port name" class="ptolemy.data.expr.StringParameter" value="">
+        </property>
+        <property name="Output port names (comma-separated)" class="ptolemy.data.expr.StringParameter" value="true">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{433.75, 220.0}">
+        </property>
+        <port name="true" class="com.isencia.passerelle.core.Port">
+            <property name="output"/>
+            <property name="multiport"/>
+        </port>
+    </entity>
+    <entity name="Set Request Status to ERROR" class="com.isencia.passerelle.edm.actor.RequestStatus">
+        <property name="Buffer time (ms)" class="ptolemy.data.expr.Parameter" value="0">
+        </property>
+        <property name="status" class="ptolemy.data.expr.StringParameter" value="ERROR">
+        </property>
+        <property name="_location" class="ptolemy.kernel.util.Location" value="{694.5, 227.25}">
+        </property>
+    </entity>
+    <relation name="_R" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+    </relation>
+    <relation name="_R_3" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+    </relation>
+    <relation name="_R_4" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+    </relation>
+    <relation name="_R_2" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+    </relation>
+    <relation name="_R_5" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+    </relation>
+    <relation name="_R_6" class="ptolemy.actor.TypedIORelation">
+        <property name="width" class="ptolemy.data.expr.Parameter" value="1">
+        </property>
+    </relation>
+    <link port="Start.output" relation="_R"/>
+    <link port="Create thumbnails for pyarch.input" relation="_R"/>
+    <link port="Create thumbnails for pyarch.output" relation="_R_4"/>
+    <link port="Stop.input" relation="_R_3"/>
+    <link port="Stop.input" relation="_R_2"/>
+    <link port="Set Request Status to FINISHED.input" relation="_R_5"/>
+    <link port="Set Request Status to FINISHED.output" relation="_R_3"/>
+    <link port="Check if thumbnails are created.input" relation="_R_4"/>
+    <link port="Check if thumbnails are created.other" relation="_R_6"/>
+    <link port="Check if thumbnails are created.true" relation="_R_5"/>
+    <link port="Set Request Status to ERROR.input" relation="_R_6"/>
+    <link port="Set Request Status to ERROR.output" relation="_R_2"/>
+</entity>
