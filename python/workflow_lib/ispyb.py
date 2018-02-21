@@ -32,10 +32,6 @@ __license__ = "MIT"
 __date__ = "27/09/2017"
 
 
-__author__ = "Olof Svensson"
-__contact__ = "svensson@esrf.eu"
-__copyright__ = "ESRF, 2013"
-__updated__ = "2016-02-17"
 
 import os
 import sys
